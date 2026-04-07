@@ -1,0 +1,20 @@
+version: '3'
+services:
+  # Definimos el primer servidor
+  srv1: &srv_config
+    build: .          # Esto le dice que use el Dockerfile que ya creaste
+    image: ubuntu-ssh
+    container_name: srv1
+  # Definimos los otros 4 usando la misma configuración
+  srv2:
+    <<: *srv_config
+    container_name: srv2
+  srv3:
+    <<: *srv_config
+    container_name: srv3
+  srv4:
+    <<: *srv_config
+    container_name: srv4
+  srv5:
+    <<: *srv_config
+    container_name: srv5

@@ -1,0 +1,34 @@
+---
+- name: Tarea de Automatización ITLA
+  hosts: servidores
+  become: yes
+
+  tasks:
+    - name: 1. Actualizar paquetes APT
+      apt:
+        update_cache: yes
+        upgrade: dist
+
+    - name: 2. Crear el usuario 'itla'
+      user:
+        name: itla
+        state: present
+        shell: /bin/bash
+
+    - name: 3. Crear carpeta 'app'
+      file:
+        path: /app
+        state: directory
+        mode: '0755'
+
+    - name: 4. Crear archivo hola.txt
+      copy:
+        dest: /app/hola.txt
+        content: "Hola mundo desde Ansible para ITLA"
+
+    - name: 5. Instalar cowsay y htop
+      apt:
+        name:
+          - cowsay
+          - htop
+        state: present
